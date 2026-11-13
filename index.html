@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Архитектура контента · конструктор</title>
+<meta name="description" content="Выберите задачу, впишите тему и аудиторию и получите заготовки хуков, превью первого кадра и запрос для ИИ.">
+<style>
+/* cyrillic */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/f1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/f2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/f1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/f2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/f1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/f2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/f1.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Golos Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/f2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Literata';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/f3.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Literata';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/f4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Literata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/f5.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Literata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/f6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Literata';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/f5.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Literata';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/f6.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Reading column for the form; the technique gets a side preview of the first frame on wide screens. */
+:root{
+  --bg:#F5F8F8; --surface:#FFFFFF; --ink:#0B1E24; --text:#2A3C42; --muted:#61767C; --rule:#D6E1E3;
+  --accent:#0A8394; --accent-ink:#FFFFFF; --accent-soft:#E0EEF0; --tint:#ECE6FF; --violet:#5B45D6;
+  /* the mock phone screen looks the same in both themes */
+  --screen:#0E2A30; --screen-fg:#FFFFFF; --screen-dim:rgba(255,255,255,.62); --screen-slot:#CBBEFF;
+  --slide:#E3F1F2; --slide-fg:#0B1E24; --frame:#1B1F22;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C1C20; --surface:#12272C; --ink:#E8F1F2; --text:#C9D8DA; --muted:#8DA3A8; --rule:#24404A;
+  --accent:#3FB8C8; --accent-ink:#06191C; --accent-soft:#163940; --tint:#262049; --violet:#B7A6FF;
+  --frame:#000000; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0C1C20; --surface:#12272C; --ink:#E8F1F2; --text:#C9D8DA; --muted:#8DA3A8; --rule:#24404A;
+  --accent:#3FB8C8; --accent-ink:#06191C; --accent-soft:#163940; --tint:#262049; --violet:#B7A6FF;
+  --frame:#000000; color-scheme:dark }
+
+*{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body{ margin:0; background:var(--bg); color:var(--text); font:400 17px/1.55 var(--sans);
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px) }
+.wrap{ max-width:960px; margin:0 auto; padding-block:24px 56px }
+.narrow{ max-width:680px }
+a{ color:var(--accent); text-underline-offset:3px }
+button, input{ font:inherit; color:inherit }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:6px }
+[hidden]{ display:none!important }
+
+/* top */
+.top{ display:flex; justify-content:space-between; align-items:baseline; gap:8px 16px; font-size:15px; flex-wrap:wrap }
+.top b{ color:var(--ink); font-weight:600 }
+.views{ display:flex; gap:18px }
+.views a{ color:var(--muted); text-decoration:none; padding-bottom:2px; border-bottom:2px solid transparent }
+.views a[aria-current="page"]{ color:var(--ink); border-color:var(--accent) }
+h1{ font-family:var(--serif); font-weight:600; font-size:clamp(28px, 6.4vw, 40px); line-height:1.12; color:var(--ink);
+  margin:28px 0 8px; letter-spacing:-.01em; text-wrap:balance }
+.lead{ margin:0; color:var(--muted); text-wrap:pretty }
+
+/* form */
+.form{ margin-top:22px; display:grid; gap:14px }
+.row2{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px }
+@media (max-width:560px){ .row2{ grid-template-columns:1fr } }
+.f label, .f legend{ display:block; font-size:14px; color:var(--muted); margin:0 0 6px; padding:0 }
+.f input[type=text]{ width:100%; padding:11px 13px; border:1px solid var(--rule); border-radius:10px; background:var(--surface); color:var(--ink) }
+.f input[type=text]::placeholder{ color:var(--muted); opacity:.8 }
+.f input[type=text]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft) }
+fieldset.f{ border:0; margin:0; padding:0; min-width:0 }
+.chips{ display:flex; flex-wrap:wrap; gap:6px }
+.chips > span{ position:relative }
+.chips input{ position:absolute; left:0; top:0; width:1px; height:1px; opacity:0; pointer-events:none; margin:0 }
+.chips label{ display:inline-block; padding:7px 14px; border:1px solid var(--rule); border-radius:999px; background:var(--surface); cursor:pointer; color:var(--ink); font-size:15px; margin:0 }
+.chips input:checked + label{ background:var(--accent-soft); border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent) }
+.chips input:focus-visible + label{ outline:2px solid var(--accent); outline-offset:2px }
+@media (max-width:480px){ .chips{ gap:5px } .chips label{ font-size:14px; padding:6px 10px } }
+.hint{ font-size:14px; color:var(--muted); margin:0 }
+.linkbtn{ background:none; border:0; padding:0; color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:3px; font-size:14px }
+
+/* technique switcher */
+.for{ margin:36px 0 10px; color:var(--muted); font-size:15px }
+.for b{ color:var(--ink); font-weight:500 }
+.picks{ display:flex; flex-wrap:wrap; gap:6px }
+@media (max-width:560px){
+  .picks{ flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; scrollbar-width:none;
+    margin-right:calc(-1 * max(16px, env(safe-area-inset-right, 0px))); padding-right:16px }
+  .picks::-webkit-scrollbar{ display:none }
+}
+.pick{ flex:none; border:1px solid var(--rule); background:transparent; border-radius:999px; padding:6px 12px; cursor:pointer; color:var(--muted); font-size:14px; white-space:nowrap }
+.pick b{ font-family:var(--serif); font-weight:400; margin-right:6px }
+.pick[aria-pressed="true"]{ border-color:var(--accent); color:var(--ink); background:var(--accent-soft) }
+
+/* technique */
+.tech{ margin-top:22px }
+.t-head{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:14px; align-items:baseline }
+.num{ font-family:var(--serif); color:var(--accent); font-size:30px; line-height:1 }
+.t-head h2{ font-family:var(--serif); font-weight:600; font-size:26px; line-height:1.18; color:var(--ink); margin:0; text-wrap:balance }
+.goal{ margin:6px 0 0; color:var(--muted) }
+.t-grid{ display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:36px; margin-top:24px; align-items:start }
+.t-side{ position:sticky; top:16px }
+@media (max-width:860px){ .t-grid{ grid-template-columns:minmax(0,1fr); gap:20px } .t-side{ position:static; order:-1 } }
+.blk h3{ margin:0 0 4px; font-size:17px; font-weight:600; color:var(--ink) }
+.help{ margin:0 0 12px; font-size:15px; color:var(--muted); text-wrap:pretty }
+.help .slot{ font-size:14px }
+
+.hooks{ list-style:none; margin:0; padding:0; display:grid; gap:8px }
+.hook{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 10px; align-items:center; background:var(--surface);
+  border:1px solid var(--rule); border-radius:12px; padding:6px 10px 6px 6px; transition:border-color .15s, background .15s }
+.hook.on{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent) }
+.hook-pick{ text-align:left; background:none; border:0; padding:8px 10px; cursor:pointer; border-radius:8px; color:var(--ink) }
+.hook-pick p{ margin:0; font-family:var(--serif); font-size:18px; line-height:1.42 }
+@media (max-width:480px){ .hook{ grid-template-columns:1fr; padding:6px 10px 10px 6px } .hook .copy{ justify-self:start; margin-left:10px } }
+.fill{ color:var(--accent); font-weight:600 }
+.slot{ color:var(--violet); background:var(--tint); border-radius:3px; padding:0 1px; box-decoration-break:clone; -webkit-box-decoration-break:clone }
+.copy{ border:1px solid var(--rule); background:transparent; border-radius:8px; padding:6px 11px; font-size:14px; cursor:pointer; color:var(--ink); white-space:nowrap }
+.copy:hover{ border-color:var(--accent) }
+.copy.ok{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink) }
+
+.ai{ margin-top:28px; background:var(--tint); border-radius:14px; padding:18px 18px 16px }
+.ai h3{ color:var(--ink) }
+.ai .help{ color:var(--text) }
+.ptext{ margin:0 0 14px; background:var(--surface); border-radius:10px; padding:12px 14px; color:var(--ink); font-size:15px; line-height:1.5 }
+.primary{ border:0; background:var(--accent); color:var(--accent-ink); border-radius:10px; padding:11px 18px; font-weight:500; cursor:pointer }
+.primary.ok{ background:var(--ink); color:var(--bg) }
+
+/* folded breakdown: looks like a button, says what is inside */
+.how{ margin-top:16px; border:1px solid var(--rule); border-radius:14px; background:var(--surface) }
+.how > summary{ list-style:none; cursor:pointer; display:grid; grid-template-columns:minmax(0,1fr) 32px; gap:12px; align-items:center; padding:14px 14px 14px 18px; border-radius:14px }
+.how > summary::-webkit-details-marker{ display:none }
+.how > summary:hover{ background:var(--accent-soft) }
+.how > summary b{ display:block; color:var(--ink); font-weight:600 }
+.how > summary small{ display:block; color:var(--muted); font-size:14px; margin-top:2px }
+.chev{ width:32px; height:32px; border-radius:50%; border:1px solid var(--rule); display:grid; place-items:center; color:var(--ink); transition:transform .2s }
+.how[open] .chev{ transform:rotate(180deg) }
+.how-b{ display:grid; gap:18px; padding:4px 18px 18px }
+.how-b h4{ margin:0 0 6px; font-size:15px; font-weight:600; color:var(--ink) }
+.how-b p{ margin:0 }
+.formula{ margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:6px 4px; align-items:center }
+.formula li{ color:var(--ink) }
+.formula li + li::before{ content:"→"; color:var(--muted); margin-right:6px }
+.ba{ display:grid; grid-template-columns:52px minmax(0,1fr); gap:4px 10px; align-items:baseline }
+.ba span{ font-size:14px; color:var(--muted) }
+.ba .a{ font-family:var(--serif); color:var(--ink); font-size:17px }
+.why{ color:var(--muted); font-size:15px; margin-top:6px!important }
+.pager{ margin-top:24px; display:flex; justify-content:space-between; align-items:center; gap:12px; padding-top:14px; border-top:1px solid var(--rule); font-size:15px; color:var(--muted) }
+.pager button{ background:none; border:0; padding:6px 0; color:var(--accent); cursor:pointer; font-size:15px }
+.pager button:disabled{ color:var(--rule); cursor:default }
+
+/* first-frame preview */
+.pv{ margin:0; display:grid; justify-items:center; gap:10px }
+.pv figcaption{ font-size:13px; color:var(--muted); text-align:center; max-width:250px }
+.device{ width:236px; border-radius:30px; background:var(--frame); padding:8px; box-shadow:0 1px 0 rgba(0,0,0,.04) }
+@media (max-width:860px){ .device{ width:196px; border-radius:26px; padding:7px } }
+.screen{ position:relative; overflow:hidden; border-radius:23px; background:var(--screen); color:var(--screen-fg); aspect-ratio:9/16; display:flex; flex-direction:column; justify-content:center; padding:18px 16px }
+@media (max-width:860px){ .screen{ border-radius:20px; padding:14px 13px } }
+.screen .txt{ font-weight:700; line-height:1.18; letter-spacing:-.01em; text-wrap:balance; transition:opacity .18s }
+.screen .txt .slot{ background:none; color:var(--screen-slot); padding:0; border-bottom:1.5px dashed currentColor; border-radius:0 }
+.screen .txt .fill{ color:var(--screen-fg); font-weight:700 }
+.screen .meta{ position:absolute; left:14px; right:44px; bottom:14px; display:grid; gap:5px; font-size:11px; color:var(--screen-dim) }
+.screen .meta b{ color:var(--screen-fg); font-weight:600 }
+.screen .bar{ height:5px; border-radius:3px; background:rgba(255,255,255,.22) }
+.screen .icons{ position:absolute; right:10px; bottom:16px; display:grid; gap:14px; color:var(--screen-fg) }
+.screen .prog{ position:absolute; top:10px; left:10px; right:10px; display:grid; grid-template-columns:repeat(3,1fr); gap:4px }
+.screen .prog i{ height:2.5px; border-radius:2px; background:rgba(255,255,255,.35) }
+.screen .prog i:first-child{ background:var(--screen-fg) }
+.screen .who{ position:absolute; top:20px; left:12px; display:flex; gap:6px; align-items:center; font-size:11px; color:var(--screen-fg) }
+.screen .who i, .feed-h i{ width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.3); display:block }
+.screen.slide{ aspect-ratio:4/5; background:var(--slide); color:var(--slide-fg) }
+.screen.slide .txt .slot{ color:#5B45D6 }
+.screen.slide .txt .fill{ color:var(--slide-fg) }
+.screen .pg{ position:absolute; top:12px; right:12px; font-size:11px; background:rgba(11,30,36,.12); color:var(--slide-fg); border-radius:999px; padding:2px 8px }
+.screen .dots{ position:absolute; bottom:12px; left:0; right:0; display:flex; justify-content:center; gap:4px }
+.screen .dots i{ width:5px; height:5px; border-radius:50%; background:rgba(11,30,36,.2) }
+.screen .dots i:first-child{ background:var(--accent) }
+.feed{ background:var(--surface); border-radius:23px; overflow:hidden; color:var(--ink) }
+.feed-h{ display:flex; gap:8px; align-items:center; padding:10px 12px; font-size:12px; font-weight:600 }
+.feed-h i{ background:var(--accent-soft) }
+.screen.square{ aspect-ratio:1/1; border-radius:0 }
+.feed-f{ padding:8px 12px 12px; display:grid; gap:6px }
+.feed-f .bar{ height:6px; border-radius:3px; background:var(--rule) }
+@media (prefers-reduced-motion: reduce){ *{ transition:none!important; scroll-behavior:auto!important } }
+
+/* all / checklist */
+.grp{ margin-top:30px }
+.grp h2{ font-family:var(--serif); font-weight:600; font-size:22px; color:var(--ink); margin:0 0 4px }
+.grp > p{ margin:0 0 6px; color:var(--muted); font-size:15px }
+.item{ border-top:1px solid var(--rule) }
+.item > summary{ list-style:none; cursor:pointer; display:grid; grid-template-columns:32px minmax(0,1fr) 20px; gap:10px; padding:13px 0; align-items:baseline }
+.item > summary::-webkit-details-marker{ display:none }
+.item > summary b{ font-family:var(--serif); color:var(--accent); font-weight:400 }
+.item > summary span{ color:var(--ink) }
+.item > summary::after{ content:"+"; color:var(--muted); font-size:20px; line-height:1 }
+.item[open] > summary::after{ content:"−" }
+.item .tech{ margin:0 0 24px }
+.item .t-head, .item .t-side{ display:none }
+.item .t-grid{ grid-template-columns:minmax(0,1fr); margin-top:0 }
+.uni{ margin-top:34px; background:var(--tint); border-radius:14px; padding:18px; color:var(--ink) }
+.uni h2{ margin:0 0 6px; font-size:18px; font-weight:600 }
+.uni ol{ margin:8px 0 14px; padding-left:20px }
+.cl{ list-style:none; margin:18px 0 0; padding:0 }
+.cl li{ border-top:1px solid var(--rule) }
+.cl label{ display:grid; grid-template-columns:22px minmax(0,1fr); gap:12px; align-items:start; padding:13px 0; cursor:pointer; color:var(--ink) }
+.cl input{ width:20px; height:20px; margin:3px 0 0; accent-color:var(--accent) }
+.cl input:checked + span{ color:var(--muted) }
+.progress{ display:flex; align-items:center; gap:12px; margin-top:16px; font-size:15px; color:var(--muted) }
+.bar2{ flex:1; height:4px; background:var(--accent-soft); border-radius:2px; overflow:hidden }
+.bar2 i{ display:block; height:100%; background:var(--accent); width:0; transition:width .2s }
+
+.about{ margin-top:56px; padding-top:18px; border-top:1px solid var(--ink); display:grid; gap:10px; font-size:15px }
+.about p{ margin:0 }
+.about .pdf{ font-weight:500 }
+.fine{ color:var(--muted); font-size:14px }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <b>Архитектура контента</b>
+    <nav class="views" aria-label="Разделы">
+      <a href="#podbor" data-view="podbor">Подбор</a>
+      <a href="#vse" data-view="vse">Все приёмы</a>
+      <a href="#chek" data-view="chek">Чек-лист</a>
+    </nav>
+  </div>
+
+  <main id="v-podbor">
+    <div class="narrow">
+      <h1>Подберите приём под свою задачу</h1>
+      <p class="lead">Выберите, что хотите улучшить, и впишите тему. Получите заготовки хуков, превью первого кадра и запрос для ИИ.</p>
+
+      <form class="form" id="form" onsubmit="return false">
+        <fieldset class="f"><legend>Что хотите улучшить</legend><div class="chips" id="sits"></div></fieldset>
+        <div class="row2">
+          <div class="f"><label for="topic">Тема</label><input type="text" id="topic" autocomplete="off" placeholder="Например, уход за кожей зимой"></div>
+          <div class="f"><label for="aud">Аудитория</label><input type="text" id="aud" autocomplete="off" placeholder="Например, девушки 25–35 лет"></div>
+        </div>
+        <fieldset class="f"><legend>Формат</legend><div class="chips" id="fmts"></div></fieldset>
+        <p class="hint" id="example-hint">Сейчас подставлен пример. <button type="button" class="linkbtn" id="clear">Очистить и вписать своё</button></p>
+      </form>
+
+      <p class="for" id="for"></p>
+      <div class="picks" id="picks" role="group" aria-label="Подходящие приёмы"></div>
+    </div>
+    <div id="current"></div>
+  </main>
+
+  <main id="v-vse" class="narrow" hidden>
+    <h1>Все 20 приёмов</h1>
+    <p class="lead">Заготовки и запросы заполнены темой и аудиторией из «Подбора».</p>
+    <div id="all"></div>
+    <section class="uni" id="uni"></section>
+  </main>
+
+  <main id="v-chek" class="narrow" hidden>
+    <h1>Перед публикацией</h1>
+    <p class="lead">Если на какой-то пункт нельзя ответить «да», материал стоит доработать.</p>
+    <div class="progress"><div class="bar2"><i id="bar"></i></div><span id="done"></span></div>
+    <ul class="cl" id="cl"></ul>
+    <p class="hint" style="margin-top:12px">Отметки хранятся только в этом браузере. <button type="button" class="linkbtn" id="cl-reset">Сбросить</button></p>
+  </main>
+
+  <footer class="about narrow">
+    <p id="authors"></p>
+    <p><a class="pdf" href="arhitektura-kontenta.pdf">Скачать гайд в PDF</a> <span class="fine">· все 20 приёмов с примерами</span></p>
+  </footer>
+</div>
+
+<script>
+const DATA = {"sections": [{"n": 1, "title": "Захват внимания", "principle": "Чёткое обещание, узнаваемый конфликт или неожиданный, но обоснованный ракурс."}, {"n": 2, "title": "Удержание", "principle": "Каждый следующий фрагмент отвечает на вопрос, созданный предыдущим."}, {"n": 3, "title": "Эмоциональный отклик", "principle": "Опирайтесь на реальные ситуации и опыт аудитории, а не на придуманный драматизм."}, {"n": 4, "title": "Доверие", "principle": "Чем сильнее обещание, тем конкретнее должно быть доказательство."}, {"n": 5, "title": "Действие", "principle": "Предлагайте продолжение, которое естественно вытекает из темы публикации."}], "cards": [{"sec": 1, "title": "Контраст с привычным убеждением", "goal": "Показать, где общее правило не работает или где ожидание расходится с реальностью.", "idea": "Возьмите убеждение или ожидание, которое разделяет аудитория, и покажите обоснованное исключение. Интерес возникает из столкновения двух картин.", "formula": ["Привычное убеждение", "Исключение или реальность", "Факт, пример или разбор"], "before": "«Как часто нужно публиковать посты»", "after": "«Почему ежедневные посты не всегда помогают расти»", "why": "Вместо темы — спор с тем, во что зритель уже верит.", "templates": ["{аудитория}: почему [привычный совет] работает не всегда", "Кажется, что [задача] — это [как выглядит со стороны]. На деле всё решает [что на самом деле]", "Все говорят: [правило]. Вот когда это ошибка"], "prompt": "Тема: {тема}. Аудитория: {аудитория}. Найди 3 убеждения или ожидания, которые эта аудитория считает очевидными. Для каждого предложи обоснованное исключение и факты, которые нужны, чтобы его подтвердить. Напиши по 2 хука для формата {формат}.", "metric": "Досмотр первых 3 секунд и спор по существу в комментариях.", "avoid": "Спорный тезис ради спора. Если контртезис нечем подтвердить, хук обманет ожидания.", "n": 1}, {"sec": 1, "title": "Ошибка с понятной ценой", "goal": "Зацепить риском, который зритель узнаёт у себя.", "idea": "Назовите конкретную ошибку и её практическое последствие. Абстрактные «потери» не цепляют, а конкретная цена — да.", "formula": ["Привычное действие", "Скрытая ошибка", "Реальное последствие"], "before": "«Ошибки в аналитике соцсетей»", "after": "«Вы смотрите только на охваты и не видите, откуда приходят заявки»", "why": "Зритель сразу проверяет себя: «а я так делаю?»", "templates": ["Вы [делаете привычное действие] — и поэтому [конкретное последствие]", "Одна ошибка в [процесс], из-за которой теряют [что именно]", "Если вы [действие], проверьте [что], иначе [последствие]"], "prompt": "Тема: {тема}. Аудитория: {аудитория}. Назови 5 типичных ошибок этой аудитории. Для каждой укажи, кто её совершает, какое проверяемое последствие она даёт и как её исправить. Выбери 2 ошибки с самой понятной ценой и напиши хуки для формата {формат}.", "metric": "Досмотр первых 3 секунд и сохранения: способ исправить ошибку сохраняют на потом.", "avoid": "Не раздувайте мелкое неудобство до катастрофы.", "n": 2}, {"sec": 1, "title": "Результат в первом кадре", "goal": "Показать итог до объяснения, а потом — что к нему привело.", "idea": "Начните с результата или пары «до / после», затем раскройте исходные условия и конкретные изменения. Подходит, только если результат можно честно показать.", "formula": ["Итог или «до / после»", "Исходные условия", "Что именно изменили"], "before": "«Как правильно ставить свет для съёмки дома»", "after": "Первый кадр — готовая картинка. Затем: «Это снято у обычного окна. Вот три вещи, которые я поменял»", "why": "Зритель видит результат глазами, а не слышит обещание.", "templates": ["Это [результат]. Вот с чего всё начиналось", "Слева — было, справа — стало. Изменили всего [число] вещи", "[Результат] при [условие]. Показываю по шагам, что сделали"], "prompt": "Тема: {тема}. Предложи 3 сценария для формата {формат}, где первые 2 секунды показывают наблюдаемый результат или пару «до / после». Для каждого укажи, какой исходный материал нужно снять и как объяснить изменения, не приписывая результату лишних причин.", "metric": "Досмотр первых 3 секунд и повторные просмотры: результат часто пересматривают.", "avoid": "Не выдавайте единичный удачный случай за типичный и не сравнивайте несопоставимые условия.", "n": 3}, {"sec": 1, "title": "Вопрос с реальной ставкой", "goal": "Поставить вопрос или дилемму, от ответа на которую зависит решение зрителя.", "idea": "Вместо «А вы знали?» — реальный выбор, где у каждого варианта есть цена. Такой вопрос и цепляет, и запускает обсуждение.", "formula": ["Ситуация выбора", "Конкретный вопрос или дилемма", "Критерий ответа"], "before": "«Как выбрать микрофон»", "after": "«Какой микрофон брать для съёмки дома, если за окном шумная улица?»", "why": "Вопрос привязан к конкретной ситуации, и зритель узнаёт в ней свою.", "templates": ["{аудитория}, что для вас важнее: [вариант А] или [вариант Б]?", "[Вариант А] или [вариант Б], если [конкретное ограничение]?", "Больше [чего] или лучше [что]? Вот как решить"], "prompt": "Тема: {тема}. Аудитория: {аудитория}. Сформулируй 6 вопросов или дилемм, которые эта аудитория реально решает. Для каждого варианта ответа укажи выигрыш, потерю и условия, когда он оправдан. Выбери 2 лучших для формата {формат}.", "metric": "Досмотр до ответа и комментарии, где зрители пишут свой выбор.", "avoid": "Ложная дилемма, когда варианты можно совместить, или вопрос, на который нельзя ответить в обещанном формате.", "n": 4}, {"sec": 1, "title": "Информационный пробел", "goal": "Создать интригу вокруг одной полезной детали.", "idea": "Назовите задачу и оставьте открытым один важный элемент. Раскройте его до середины материала, а не в самом конце.", "formula": ["Понятная задача", "Один недостающий элемент", "Быстрое раскрытие"], "before": "«Советы по записи звука»", "after": "«Одна настройка звука, которую я проверяю перед каждой записью»", "why": "Вопрос без ответа трудно бросить, а ответ совсем близко.", "templates": ["Одна [настройка или деталь], которую я проверяю перед каждым [действием]", "В [процесс] есть шаг, который пропускают почти все", "Нам помогла одна [метрика или деталь]. Расскажу какая"], "prompt": "Тема: {тема}. Аудитория: {аудитория}. Найди 5 полезных деталей, которые эта аудитория часто упускает. Для каждой напиши хук ровно с одним открытым вопросом и сам ответ, который прозвучит до середины материала в формате {формат}.", "metric": "Удержание до момента раскрытия и сохранения после него.", "avoid": "Не тяните ответ до конца ради удержания: зритель почувствует манипуляцию.", "n": 5}, {"sec": 1, "title": "История с поворота", "goal": "Начать рассказ с момента, когда всё изменилось, в том числе с неудачи.", "idea": "Не начинайте с предыстории. Покажите поворот или провал, коротко объясните, что к нему привело, и закончите выводом.", "formula": ["Момент перемены", "Что к нему привело", "Что поняли и изменили"], "before": "«Наша история запуска»", "after": "«Гипотеза не подтвердилась. Вот что мы проверили дальше»", "why": "Поворот сразу создаёт напряжение, а честный вывод даёт пользу.", "templates": ["На [этапе] я понял, почему [что-то] не работает", "[Гипотеза] не подтвердилась. Вот что мы сделали дальше", "После [события] мы полностью пересобрали [что]"], "prompt": "Вот факты истории: [ФАКТЫ]. Тема: {тема}. Найди момент, после которого изменилось решение или действие. Напиши короткий сценарий для формата {формат}, который начинается с этого момента. Ничего не добавляй к фактам и отметь, каких деталей не хватает.", "metric": "Досмотр до конца и комментарии с похожим опытом.", "avoid": "Не придумывайте драму и не делайте громких выводов о причинах, если данных мало.", "n": 6}, {"sec": 2, "title": "Маршрут по шагам", "goal": "Дать зрителю карту: из каких шагов или частей состоит задача.", "idea": "Разложите задачу на 3–5 шагов или составляющих и идите по ним по порядку. Каждый шаг должен менять понимание или действие.", "formula": ["Карта шагов", "Каждый шаг с примером", "Как проверить результат"], "before": "«Как разобрать неудачный пост»", "after": "«Разбираю неудачный пост за 3 шага: цель → метрика → новая гипотеза»", "why": "Зритель видит, сколько осталось, и досматривает.", "templates": ["[Задача] за [число] шага: [шаг 1] → [шаг 2] → [шаг 3]", "Из чего складывается [результат]: [часть 1], [часть 2], [часть 3]", "Как я [делаю задачу]: сначала [шаг], потом [шаг], и только потом [шаг]"], "prompt": "Тема: {тема}. Разложи задачу для аудитории {аудитория} на 3–5 зависимых шагов или составляющих. Для каждого укажи действие, пример и ожидаемый результат. Убери шаги, которые не влияют на итог. Напиши сценарий для формата {формат}.", "metric": "Глубина просмотра и сохранения.", "avoid": "Не подгоняйте процесс под «3 шага», если логика требует другого числа.", "n": 7}, {"sec": 2, "title": "Нарастание", "goal": "Удерживать внимание тем, что каждый фрагмент добавляет новое условие.", "idea": "Начните с простого случая и на каждом шаге добавляйте новое: факт, ограничение, усложнение. Каждый кадр меняет вывод, а не повторяет предыдущий.", "formula": ["Простой случай", "Новое условие или ограничение", "Итоговая картина"], "before": "«Как снимать видео дома»", "after": "«Снимаем дома. Теперь — в шумном месте. А теперь ещё и при плохом свете»", "why": "Каждый новый уровень — повод досмотреть следующий.", "templates": ["[Простая задача] — это легко. А если добавить [ограничение]?", "Сначала [наблюдение 1]. Потом выяснилось [наблюдение 2]. И главное — [вывод]", "Уровень 1: [случай]. Уровень 2: [сложнее]. Уровень 3: [ещё сложнее]"], "prompt": "Тема: {тема}. Построй 3–5 последовательных шагов для аудитории {аудитория}, где каждый добавляет новый проверяемый факт или ограничение и меняет решение. Отметь повторы, которые можно убрать. Формат: {формат}.", "metric": "Удержание на переходах между уровнями.", "avoid": "Не растягивайте одну мысль на пять кадров. Если новое условие не меняет решение, оно лишнее.", "n": 8}, {"sec": 2, "title": "Мини-детектив", "goal": "Превратить разбор проблемы в поиск причины.", "idea": "Покажите симптом, рассмотрите 2–3 правдоподобные версии и объясните, какие данные помогли сделать вывод.", "formula": ["Симптом", "Версии", "Проверка и вывод"], "before": "«Почему падают заявки»", "after": "«Просмотры выросли, а заявки упали. Где искать причину?»", "why": "Зритель перебирает версии вместе с автором.", "templates": ["[Хорошая метрика] выросла, а [важная метрика] упала. Почему?", "Почему [результат] выглядит [плохо] при [хороших условиях]?", "Три версии, почему [проблема]. Проверили каждую"], "prompt": "Вот данные кейса: [ФАКТЫ]. Тема: {тема}. Сделай из этого мини-детектив для формата {формат}: симптом, 2–3 альтернативные версии, наблюдения для проверки каждой и самый обоснованный вывод. Не выдавай совпадение за доказанную причину.", "metric": "Досмотр до развязки и сохранения.", "avoid": "Не прячьте важные данные ради эффектной развязки.", "n": 9}, {"sec": 2, "title": "Сравнение и выбор по ситуации", "goal": "Помочь выбрать между вариантами по понятным критериям.", "idea": "Не спорьте, что лучше. Задайте критерии, сравните варианты в одинаковых условиях и закончите правилом «выбирайте А, если…».", "formula": ["Критерии", "Сравнение", "Что выбрать в какой ситуации"], "before": "«Карусель или Reels?»", "after": "«Карусель или Reels, если цель — чтобы материал сохраняли?»", "why": "Ответ «зависит от» превращается в понятное правило выбора.", "templates": ["[Вариант А] или [вариант Б]: сравнил по [число] критериям", "Выбирайте [А], если [условие]. [Б] — если [условие]", "Если [ситуация] — [решение]. Если [другая ситуация] — [другое решение]"], "prompt": "Тема: {тема}. Сравни [ВАРИАНТ А] и [ВАРИАНТ Б] для аудитории {аудитория}. Предложи 4 критерия, симметричную таблицу и вывод «выбирайте А, если… / Б, если…». Отметь, каких данных не хватает. Формат: {формат}.", "metric": "Сохранения и вопросы «а если у меня…» в комментариях.", "avoid": "Не объявляйте универсального победителя без контекста.", "n": 10}, {"sec": 2, "title": "Смысловая петля", "goal": "Закончить ответом на вопрос, с которого начали.", "idea": "В начале задайте вопрос, в середине соберите аргументы, а в финале вернитесь к вопросу и ответьте точнее, чем зритель ожидал.", "formula": ["Исходный вопрос", "Аргументы", "Возврат к вопросу"], "before": "«Как быстро делать контент»", "after": "«Можно ли подготовить контент за час?» → разбор этапов → честный ответ", "why": "Обещание из первых секунд закрывается в финале, и до него досматривают.", "templates": ["Можно ли [желаемое] за [срок]? Проверим", "Нужен ли [дорогой вариант]? Ответ будет неочевидным", "Вопрос: [вопрос]. Разберёмся и вернёмся к нему в конце"], "prompt": "Вопрос: [ВОПРОС]. Тема: {тема}. Построй сценарий для формата {формат}: вступление формулирует вопрос, середина раскрывает аргументы, финал отвечает на тот же вопрос точнее. Убери повторы.", "metric": "Доля досмотров до конца.", "avoid": "Не подменяйте ответ новой загадкой.", "n": 11}, {"sec": 3, "title": "Узнаваемая ситуация", "goal": "Помочь аудитории увидеть себя в конкретной детали или реплике.", "idea": "Опишите узнаваемый момент: фразу клиента, привычку, рабочую дилемму. Потом дайте полезный выход.", "formula": ["Знакомая ситуация или реплика", "Что за ней стоит", "Полезный выход"], "before": "«Как работать со сложными клиентами»", "after": "«Когда клиент просит „просто сделать красиво“, но не может назвать цель»", "why": "Зритель узнаёт себя за секунду и пишет «это про меня».", "templates": ["Когда [типичная ситуация], а [неожиданная деталь]", "„[Фраза, которую часто слышит аудитория]“. Что на самом деле за ней стоит", "Если вы хоть раз [узнаваемое действие], этот ролик для вас"], "prompt": "Аудитория: {аудитория}. Тема: {тема}. Придумай 8 узнаваемых рабочих или бытовых ситуаций или реплик. Используй конкретные детали и живую речь. Для двух лучших предложи полезный выход в формате {формат}. Не высмеивай людей.", "metric": "Комментарии «это про меня», отметки друзей, пересылки.", "avoid": "Стереотипы и насмешки над аудиторией. Не выдавайте вымышленную реплику за слова реального человека.", "n": 12}, {"sec": 3, "title": "Смена перспективы", "goal": "Показать одну ситуацию глазами разных участников.", "idea": "Меняйте точку зрения, не меняя фактов. Контраст помогает понять конфликт ожиданий и найти общее решение.", "formula": ["Точка зрения А", "Точка зрения Б", "Общий вывод"], "before": "«Почему правки затягиваются»", "after": "Как выглядит «быстро поправить пост» для заказчика и для дизайнера", "why": "Обе стороны узнают себя, и обсуждение запускается само.", "templates": ["[Ситуация] глазами [роль А] и [роль Б]", "Что [роль А] считает [удобством], а [роль Б] видит как [проблему]", "Для [роль А] это [пять минут]. Для [роль Б] — [что на самом деле]"], "prompt": "Ситуация: [СИТУАЦИЯ]. Тема: {тема}. Опиши две точки зрения: цели, ограничения и чего не знает каждая сторона. Напиши сценарий для формата {формат}, который честно показывает мотивы обеих сторон и предлагает практическое решение.", "metric": "Комментарии с обеих сторон и пересылки коллегам.", "avoid": "Не приписывайте одной стороне мыслей, которых она не высказывала.", "n": 13}, {"sec": 3, "title": "Неудобная правда", "goal": "Сказать то, о чём обычно молчат, и сразу дать выход.", "idea": "Уберите обвинение и назовите наблюдаемое противоречие между тем, чего хочется, и тем, что делается на самом деле.", "formula": ["Чего хочется", "Что мешает", "Что можно изменить"], "before": "«Почему не растёт аккаунт»", "after": "«Иногда проблема не в алгоритме, а в том, что ролик непонятен без контекста»", "why": "Честность цепляет, а следующий шаг снимает защитную реакцию.", "templates": ["Иногда проблема не в [удобное объяснение], а в [настоящая причина]", "[Инструмент] не спасёт, если [неудобная правда]", "Неприятно признавать, но [наблюдение]. Что с этим делать"], "prompt": "Тема: {тема}. Напиши 3 «неудобные правды» для аудитории {аудитория}. Замени обвинения конкретными наблюдениями, предложи, как проверить каждый тезис, и одно действие. Без абсолютных утверждений. Формат: {формат}.", "metric": "Сохранения и содержательные споры в комментариях.", "avoid": "Прямота без уважения выглядит как агрессия ради охватов.", "n": 14}, {"sec": 4, "title": "Показать, а не заявить", "goal": "Заменить «лучший» и «удобный» тем, что можно увидеть.", "idea": "Каждое оценочное слово переведите в демонстрацию, параметр или процесс. Зритель видит, как вы принимаете решения, и начинает верить.", "formula": ["Обещание", "Наблюдаемое доказательство", "Что это значит для зрителя"], "before": "«Наш рюкзак очень прочный»", "after": "Крупный план шва и материала с условиями теста", "why": "Доказательство работает там, где прилагательное пропускают мимо ушей.", "templates": ["Вместо „[прилагательное]“ — покажу [демонстрация]", "Как я [делаю работу]: запись экрана без монтажа", "Проверил [свойство] в [условия]. Вот что вышло"], "prompt": "Вот текст: [ТЕКСТ]. Тема: {тема}. Найди неподтверждённые оценочные слова. Для каждого предложи факт, тест или демонстрацию, которые могут его заменить. Если доказательства нет, предложи более честную формулировку. Затем набросай раскадровку для формата {формат}.", "metric": "Сохранения и вопросы о деталях в личных сообщениях.", "avoid": "Не подменяйте доказательство постановкой и не показывайте конфиденциальные данные.", "n": 15}, {"sec": 4, "title": "Границы применимости", "goal": "Честно сказать, когда совет не работает.", "idea": "Покажите условия, в которых метод помогает, и случаи, когда его нужно менять. Это звучит увереннее, чем «подходит всем».", "formula": ["Когда работает", "Когда не подходит", "Как выбрать"], "before": "«Почему нужен контент-план»", "after": "«Когда контент-план на месяц полезен, а когда мешает быстрым тестам»", "why": "Признанные ограничения повышают доверие ко всему остальному.", "templates": ["Когда [метод] помогает, а когда мешает", "Кому подойдёт [решение], а кому лучше [альтернатива]", "[Совет] работает, только если [условие]"], "prompt": "Совет: [СОВЕТ]. Тема: {тема}. Опиши предпосылки, 3 случая, когда совет уместен, 2 ограничения и альтернативу. Напиши сценарий для формата {формат}, который помогает аудитории {аудитория} понять, подходит ли совет именно ей.", "metric": "Сохранения и вопросы «а в моём случае?».", "avoid": "Не прячьте незнание за «всё индивидуально».", "n": 16}, {"sec": 4, "title": "Мини-кейс без магии", "goal": "Показать реальные условия, действия и результат с оговорками.", "idea": "Кейс — это контекст, гипотеза, действия, метрика и ограничения. Не всё улучшение можно приписать одному действию, и об этом стоит сказать.", "formula": ["Контекст", "Действия и метрика", "Вывод с оговорками"], "before": "«Как мы увеличили продажи»", "after": "«Тест двух офферов: что сравнивали и почему вывод пока предварительный»", "why": "Честные оговорки делают цифры убедительнее.", "templates": ["Тест [А] и [Б]: что сравнивали и что получилось", "Было [исходное]. Сделали [действие]. Изменилось [метрика]. Но есть нюанс", "Что сработало в [проект], а что пока неизвестно"], "prompt": "Вот данные кейса: [ДАННЫЕ]. Тема: {тема}. Собери мини-кейс без домыслов: отдельно факты, гипотезы и ограничения сравнения. Затем напиши короткий сценарий для формата {формат}: контекст, действия, метрика, вывод.", "metric": "Сохранения и просьбы рассказать подробнее.", "avoid": "Не выдумывайте цифры, отзывы и «рост в 10 раз».", "n": 17}, {"sec": 5, "title": "Маленький первый шаг", "goal": "Дать действие на 10–15 минут, после которого сразу виден результат.", "idea": "Вместо «начните новую жизнь» предложите самую маленькую версию действия или мини-эксперимент с одним изменением.", "formula": ["Большая цель", "Маленькая версия", "Что наблюдать"], "before": "«Начните вести аналитику»", "after": "«Не стройте дашборд. Начните с трёх метрик в таблице»", "why": "Маленький шаг можно сделать прямо сейчас.", "templates": ["Не нужно [большое действие]. Начните с [маленькое действие]", "Попробуйте сегодня: [одно изменение] — и сравните [что]", "10 минут на [действие]: вот что это покажет"], "prompt": "Цель: [ЦЕЛЬ]. Тема: {тема}. Найди для аудитории {аудитория} 3 первых шага или мини-эксперимента на 10–15 минут без бюджета. Для каждого укажи одно изменение, что сравнить и чего этот шаг не гарантирует. Формат: {формат}.", "metric": "Сохранения и комментарии «попробовал».", "avoid": "Маленький шаг не должен скрывать сложность всей задачи.", "n": 18}, {"sec": 5, "title": "Проверочный список", "goal": "Дать инструмент, которым пользуются после просмотра.", "idea": "Переведите советы в 5–7 вопросов с ответом «да» или «нет», а к каждому «нет» добавьте, что исправить.", "formula": ["Ситуация", "5–7 проверок", "Что исправить"], "before": "«Советы перед публикацией»", "after": "«5 вещей, которые я проверяю перед публикацией видео»", "why": "Чек-лист сохраняют и к нему возвращаются.", "templates": ["[Число] вещей, которые стоит проверить перед [действием]", "Чек-лист перед [запуском]: если хоть один пункт „нет“, не публикуйте", "Проверьте свой [объект] по этим [число] пунктам"], "prompt": "Задача: [ЗАДАЧА]. Тема: {тема}. Собери чек-лист из 5–7 проверок с ответом «да» или «нет» для аудитории {аудитория}. Для каждого «нет» укажи действие. Убери общие пожелания вроде «проверьте качество». Оформи для формата {формат}.", "metric": "Сохранения и пересылки.", "avoid": "Список общих пожеланий не помогает принимать решения.", "n": 19}, {"sec": 5, "title": "Логичный следующий шаг", "goal": "Перейти к призыву без резкого рекламного поворота.", "idea": "Призыв продолжает полезную мысль и предлагает ровно то, что нужно после неё: сохранить, проверить, сравнить, задать вопрос.", "formula": ["Полезный вывод", "Что осталось сделать", "Подходящее действие"], "before": "«Подписывайтесь, чтобы не пропустить»", "after": "«Сохраните шаблон таблицы — пригодится при следующей проверке»", "why": "Действие вытекает из материала, а не прерывает его.", "templates": ["Сохраните [инструмент], чтобы [когда пригодится]", "Сравните свой [объект] по этой таблице и напишите, что получилось", "Если нужен [следующий шаг], [где его взять]"], "prompt": "Вот содержание материала: [СОДЕРЖАНИЕ]. Тема: {тема}. Предложи 5 призывов к действию для аудитории {аудитория}, которые логически продолжают материал: сохранить, проверить, сравнить, задать вопрос, перейти к инструменту. Без давления и искусственного дефицита.", "metric": "Целевые действия: сохранения, ответы, переходы, заявки.", "avoid": "Призыв, не связанный с материалом, воспринимается как подмена обещания.", "n": 20}], "navigator": [["Не могу придумать начало ролика", [1, 2, 3, 5]], ["После хорошего начала становится скучно", [7, 8, 9, 11]], ["Нужно просто объяснить сложную тему", [7, 8, 16]], ["Мало комментариев и реакций", [4, 12, 13, 14]], ["Хочу рассказать историю или кейс", [3, 6, 17]], ["Нужно показать пользу продукта без давления", [3, 15, 16]], ["Нужно сравнить варианты и помочь выбрать", [4, 8, 10]], ["Люди не верят обещаниям и выводам", [15, 16, 17]], ["Хочу, чтобы материал сохраняли и применяли", [7, 18, 19]], ["Есть просмотры, но мало следующих действий", [10, 18, 19, 20]]], "checklist": ["Ясно, для кого материал и с какой задачей он помогает.", "Первые секунды обещают то, что материал действительно раскрывает.", "Хук понятен без длинного контекста и внутренних терминов.", "После вступления появляется новая информация, а не повтор обещания.", "Есть пример, факт, демонстрация или честно обозначенная гипотеза.", "В сценарии нет вымышленных результатов, отзывов и цифр.", "Ни один кадр или слайд не существует только ради длины.", "Финал закрывает главный вопрос или оставляет полезный инструмент.", "Следующий шаг уместен: сохранить, проверить, сравнить или спросить."], "universal": {"intro": "Ты опытный редактор контента и не придумываешь факты. Помоги создать {формат} на тему {тема} для аудитории {аудитория}. Цель материала: [ЧТО ДОЛЖНО ИЗМЕНИТЬСЯ У ЗРИТЕЛЯ].", "steps": ["Извлеки из моих материалов только подтверждённые факты и отдельно перечисли, чего не хватает.", "Предложи 3 комбинации приёмов: захват внимания, удержание, доверие, следующий шаг. Объясни, почему каждая подходит.", "Выбери лучшую и напиши сценарий с пометками «визуал / текст / доказательство».", "Проверь: обещание из начала закрыто, нет пустых повторов, каждый тезис обоснован, призыв связан с содержанием.", "Дай короткую и подробную версии и список того, что нужно доснять или проверить."], "outro": "Мои материалы и ограничения: [ВСТАВЬТЕ СВОИ ФАКТЫ]"}, "authors": {"text": "Гайд собрали Валерия — SMM-специалист, и Дмитрий — разработчик.", "contact": "Вопросы и идеи: lyubetsky.dmitry@gmail.com / @dmitridad_msc"}, "navShort": ["Начало ролика", "Скучно после начала", "Сложная тема", "Мало комментариев", "История или кейс", "Польза без давления", "Сравнить варианты", "Не верят обещаниям", "Чтобы сохраняли", "Мало действий"]};
+const FORMATS = [
+  { label: "Reels", value: "Reels", kind: "reels" },
+  { label: "Карусель", value: "карусель", kind: "slide" },
+  { label: "Пост", value: "пост", kind: "post" },
+  { label: "Stories", value: "Stories", kind: "stories" },
+];
+const EXAMPLE = { topic: "продвижение кофейни в соцсетях", aud: "владельцы небольших кофеен" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pad = n => String(n).padStart(2, "0");
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("ak:" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("ak:" + k, JSON.stringify(v)); } catch (e) {} }
+};
+const CARD = Object.fromEntries(DATA.cards.map(c => [c.n, c]));
+const state = {
+  sit: store.get("sit", 0), topic: store.get("topic", EXAMPLE.topic), aud: store.get("aud", EXAMPLE.aud),
+  fmt: store.get("fmt", "Reels"), pick: 0, hook: 0,
+};
+if (!DATA.navigator[state.sit]) state.sit = 0;
+if (!FORMATS.some(f => f.value === state.fmt)) state.fmt = "Reels";
+const fmtKind = () => FORMATS.find(f => f.value === state.fmt).kind;
+
+const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+function vals(t) {
+  const v = { "тема": state.topic.trim(), "аудитория": state.aud.trim(), "формат": state.fmt };
+  if (t.startsWith("{")) { const k = t.slice(1, t.indexOf("}")); if (v[k]) v[k] = cap(v[k]); }
+  return v;
+}
+function fillHTML(t) {
+  const v = vals(t);
+  return esc(t)
+    .replace(/\{([^}]+)\}/g, (m, k) => v[k] ? `<span class="fill">${esc(v[k])}</span>` : `<span class="slot">[${k}]</span>`)
+    .replace(/\[([^\]]+)\]/g, (m, k) => `<span class="slot">[${k}]</span>`);
+}
+const fillText = t => { const v = vals(t); return t.replace(/\{([^}]+)\}/g, (m, k) => v[k] || `[${k}]`); };
+const slotHTML = t => esc(t).replace(/\[([^\]]+)\]/g, (m, k) => `<span class="slot">[${k}]</span>`);
+const hasManualSlots = t => /\[[^\]]+\]/.test(t);
+
+async function copy(btn, text) {
+  const label = btn.textContent;
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; }
+  catch (e) {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "absolute"; ta.style.left = "-9999px";
+    document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand("copy"); } catch (e2) {}
+    ta.remove();
+  }
+  btn.textContent = ok ? "Скопировано" : "Не получилось, выделите текст вручную";
+  btn.classList.toggle("ok", ok);
+  setTimeout(() => { btn.textContent = label; btn.classList.remove("ok"); }, 1600);
+}
+
+const ICON = {
+  heart: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+  chat: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1-4.1A8 8 0 1 1 20 12z"/></svg>',
+  send: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4 18-7z"/></svg>',
+  chev: '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',
+};
+
+function previewHTML(text) {
+  const kind = fmtKind();
+  const len = text.replace(/<[^>]+>/g, "").length;
+  const small = window.matchMedia("(max-width:860px)").matches;
+  let size = len < 45 ? 23 : len < 75 ? 20 : len < 105 ? 17 : 15;
+  if (kind === "post") size -= 3;
+  if (small) size -= 2;
+  const txt = `<div class="txt" style="font-size:${size}px">${text}</div>`;
+  let inner;
+  if (kind === "reels") inner = `<div class="screen">${txt}
+      <div class="icons">${ICON.heart}${ICON.chat}${ICON.send}</div>
+      <div class="meta"><b>ваш_аккаунт</b><span class="bar" style="width:90%"></span><span class="bar" style="width:60%"></span></div></div>`;
+  else if (kind === "stories") inner = `<div class="screen"><div class="prog"><i></i><i></i><i></i></div>
+      <div class="who"><i></i>ваш_аккаунт</div>${txt}</div>`;
+  else if (kind === "slide") inner = `<div class="screen slide"><span class="pg">1/7</span>${txt}<div class="dots"><i></i><i></i><i></i><i></i><i></i></div></div>`;
+  else inner = `<div class="feed"><div class="feed-h"><i></i>ваш_аккаунт</div><div class="screen square">${txt}</div>
+      <div class="feed-f"><span class="bar" style="width:40%"></span><span class="bar" style="width:85%"></span></div></div>`;
+  const name = FORMATS.find(f => f.value === state.fmt).label;
+  return `<figure class="pv"><div class="device">${inner}</div>
+    <figcaption>Так хук выглядит в формате «${esc(name)}». Нажмите на другую заготовку, чтобы сравнить.</figcaption></figure>`;
+}
+
+function techHTML(c, withPreview) {
+  const sel = Math.min(state.hook, c.templates.length - 1);
+  const hooks = c.templates.map((t, i) =>
+    `<li class="hook ${withPreview && i === sel ? "on" : ""}">
+      <button type="button" class="hook-pick" data-hook="${i}" aria-pressed="${withPreview && i === sel}"><p>${fillHTML(t)}</p></button>
+      <button type="button" class="copy" data-copy="hook" data-c="${c.n}" data-i="${i}">Копировать</button></li>`).join("");
+  const manual = hasManualSlots(c.prompt);
+  return `<article class="tech">
+    <div class="t-head"><span class="num">${pad(c.n)}</span><div><h2>${esc(c.title)}</h2><p class="goal">${esc(c.goal)}</p></div></div>
+    <div class="t-grid">
+      <div class="t-main">
+        <div class="blk"><h3>Заготовки хуков</h3>
+          <p class="help"><span class="slot">[В скобках]</span> — то, что нужно дописать самому.${withPreview ? " Нажмите на заготовку, чтобы увидеть её на превью." : ""}</p>
+          <ul class="hooks">${hooks}</ul></div>
+
+        <div class="blk ai"><h3>Запрос для ChatGPT или Claude</h3>
+          <p class="help">Нужно больше вариантов? В этот запрос уже подставлены ваша тема, аудитория и формат. Скопируйте его и вставьте в чат с ИИ${manual ? ", заменив поля в скобках своими данными" : ""}.</p>
+          <p class="ptext">${fillHTML(c.prompt)}</p>
+          <button type="button" class="primary" data-copy="prompt" data-c="${c.n}">Скопировать запрос</button></div>
+
+        <details class="how"><summary><span><b>Разбор приёма</b><small>Формула, пример «было → стало», как понять, что сработало</small></span><span class="chev">${ICON.chev}</span></summary>
+          <div class="how-b">
+            <div><h4>Суть</h4><p>${esc(c.idea)}</p></div>
+            <div><h4>Формула</h4><ol class="formula">${c.formula.map(f => `<li>${esc(f)}</li>`).join("")}</ol></div>
+            <div><h4>Было и стало</h4><div class="ba"><span>Было</span><p>${esc(c.before)}</p><span>Стало</span><p class="a">${esc(c.after)}</p></div><p class="why">${esc(c.why)}</p></div>
+            <div><h4>Как понять, что сработало</h4><p>${esc(c.metric)}</p></div>
+            <div><h4>Чего избегать</h4><p>${esc(c.avoid)}</p></div>
+          </div></details>
+      </div>
+      ${withPreview ? `<aside class="t-side" aria-label="Превью первого кадра">${previewHTML(fillHTML(c.templates[sel]))}</aside>` : ""}
+    </div>
+  </article>`;
+}
+
+function renderForm() {
+  $("#sits").innerHTML = DATA.navShort.map((s, i) =>
+    `<span><input type="radio" name="sit" id="sit${i}" value="${i}" ${i === state.sit ? "checked" : ""}><label for="sit${i}" title="${esc(DATA.navigator[i][0])}">${esc(s)}</label></span>`).join("");
+  $("#fmts").innerHTML = FORMATS.map((f, i) =>
+    `<span><input type="radio" name="fmt" id="fmt${i}" value="${f.value}" ${f.value === state.fmt ? "checked" : ""}><label for="fmt${i}">${f.label}</label></span>`).join("");
+  $("#topic").value = state.topic; $("#aud").value = state.aud;
+}
+
+function renderPodbor() {
+  const [sitTitle, refs] = DATA.navigator[state.sit];
+  if (state.pick >= refs.length) state.pick = 0;
+  $("#for").innerHTML = `<b>${esc(sitTitle)}</b> — подходят ${refs.length} ${refs.length > 4 ? "приёмов" : "приёма"}:`;
+  $("#picks").innerHTML = refs.map((n, i) =>
+    `<button type="button" class="pick" data-pick="${i}" aria-pressed="${i === state.pick}"><b>${pad(n)}</b>${esc(CARD[n].title)}</button>`).join("");
+  const howOpen = document.querySelector("#current details.how")?.open;
+  const c = CARD[refs[state.pick]];
+  $("#current").innerHTML = techHTML(c, true) + `<div class="pager narrow">
+    <button type="button" data-step="-1" ${state.pick === 0 ? "disabled" : ""}>← Назад</button>
+    <span>${state.pick + 1} из ${refs.length}</span>
+    <button type="button" data-step="1" ${state.pick === refs.length - 1 ? "disabled" : ""}>Следующий приём →</button></div>`;
+  if (howOpen) $("#current details.how").open = true;
+  $("#example-hint").hidden = !(state.topic === EXAMPLE.topic && state.aud === EXAMPLE.aud);
+}
+
+function renderAll() {
+  const open = new Set([...document.querySelectorAll("#all details.item[open]")].map(d => d.dataset.n));
+  $("#all").innerHTML = DATA.sections.map(s => `<section class="grp"><h2>${esc(s.title)}</h2><p>${esc(s.principle)}</p>
+    ${DATA.cards.filter(c => c.sec === s.n).map(c => `<details class="item" data-n="${c.n}" ${open.has(String(c.n)) ? "open" : ""}>
+      <summary><b>${pad(c.n)}</b><span>${esc(c.title)}</span></summary>${techHTML(c, false)}</details>`).join("")}</section>`).join("");
+  const u = DATA.universal;
+  $("#uni").innerHTML = `<h2>Не знаете, с чего начать?</h2><p>Отдайте задачу ИИ целиком: он сам предложит комбинацию приёмов. Тема, аудитория и формат уже подставлены.</p>
+    <p>${fillHTML(u.intro)}</p><ol>${u.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol><p>${fillHTML(u.outro)}</p>
+    <button type="button" class="primary" data-copy="uni">Скопировать запрос</button>`;
+}
+
+function renderChecklist() {
+  const done = store.get("cl", []);
+  $("#cl").innerHTML = DATA.checklist.map((t, i) =>
+    `<li><label><input type="checkbox" data-i="${i}" ${done.includes(i) ? "checked" : ""}><span>${esc(t)}</span></label></li>`).join("");
+  updateProgress();
+}
+function updateProgress() {
+  const boxes = [...document.querySelectorAll("#cl input")];
+  const n = boxes.filter(b => b.checked).length;
+  $("#bar").style.width = (100 * n / boxes.length) + "%";
+  $("#done").textContent = `${n} из ${boxes.length}`;
+}
+
+function show() {
+  const h = location.hash.slice(1);
+  const view = ["podbor", "vse", "chek"].includes(h) ? h : "podbor";
+  for (const id of ["podbor", "vse", "chek"]) $("#v-" + id).hidden = id !== view;
+  document.querySelectorAll(".views a").forEach(a => {
+    if (a.dataset.view === view) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+  if (view === "vse") renderAll();
+}
+
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.name === "sit") { state.sit = +t.value; state.pick = 0; state.hook = 0; store.set("sit", state.sit); renderPodbor(); }
+  if (t.name === "fmt") { state.fmt = t.value; store.set("fmt", state.fmt); renderPodbor(); }
+  if (t.closest("#cl")) { store.set("cl", [...document.querySelectorAll("#cl input")].filter(b => b.checked).map(b => +b.dataset.i)); updateProgress(); }
+});
+let typing;
+for (const key of ["topic", "aud"]) {
+  const el = $("#" + key);
+  el.addEventListener("input", () => {
+    state[key] = el.value; store.set(key, state[key]);
+    clearTimeout(typing); typing = setTimeout(renderPodbor, 120);
+  });
+}
+$("#clear").addEventListener("click", () => {
+  state.topic = ""; state.aud = ""; $("#topic").value = ""; $("#aud").value = "";
+  store.set("topic", ""); store.set("aud", ""); renderPodbor(); $("#topic").focus();
+});
+$("#cl-reset").addEventListener("click", () => { store.set("cl", []); renderChecklist(); });
+document.addEventListener("click", e => {
+  const hk = e.target.closest("#current [data-hook]");
+  if (hk) {
+    state.hook = +hk.dataset.hook; renderPodbor();
+    const pv = $("#current .t-side");
+    if (pv && pv.getBoundingClientRect().bottom < 0) pv.scrollIntoView({ block: "nearest" });
+    return;
+  }
+  const pk = e.target.closest("[data-pick]");
+  if (pk) { state.pick = +pk.dataset.pick; state.hook = 0; renderPodbor(); return; }
+  const st = e.target.closest("[data-step]");
+  if (st) {
+    state.pick += +st.dataset.step; state.hook = 0; renderPodbor();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $("#for").scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+    return;
+  }
+  const b = e.target.closest("[data-copy]");
+  if (!b) return;
+  let text = "";
+  if (b.dataset.copy === "hook") text = fillText(CARD[b.dataset.c].templates[b.dataset.i]);
+  if (b.dataset.copy === "prompt") text = fillText(CARD[b.dataset.c].prompt);
+  if (b.dataset.copy === "uni") { const u = DATA.universal; text = [fillText(u.intro), ...u.steps.map((s, i) => `${i + 1}. ${s}`), fillText(u.outro)].join("\n"); }
+  copy(b, text);
+});
+window.addEventListener("hashchange", show);
+window.matchMedia("(max-width:860px)").addEventListener("change", renderPodbor);
+
+$("#authors").innerHTML = `${slotHTML(DATA.authors.text)}<br>${slotHTML(DATA.authors.contact)
+  .replace(/([\w.+-]+@[\w-]+\.[\w.]+)/, '<a href="mailto:$1">$1</a>')}`;
+renderForm(); renderPodbor(); renderChecklist(); show();
+</script>
+</body>
+</html>
