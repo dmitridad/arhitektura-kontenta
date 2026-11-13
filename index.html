@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Архитектура контента · конструктор</title>
 <meta name="description" content="Выберите задачу, впишите тему и аудиторию и получите заготовки хуков, превью первого кадра и запрос для ИИ.">
@@ -136,21 +137,12 @@
 :root{
   --bg:#F5F8F8; --surface:#FFFFFF; --ink:#0B1E24; --text:#2A3C42; --muted:#61767C; --rule:#D6E1E3;
   --accent:#0A8394; --accent-ink:#FFFFFF; --accent-soft:#E0EEF0; --tint:#ECE6FF; --violet:#5B45D6;
-  /* the mock phone screen looks the same in both themes */
   --screen:#0E2A30; --screen-fg:#FFFFFF; --screen-dim:rgba(255,255,255,.62); --screen-slot:#CBBEFF;
   --slide:#E3F1F2; --slide-fg:#0B1E24; --frame:#1B1F22;
   --serif:"Literata", Georgia, "Times New Roman", serif;
   --sans:"Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color-scheme:light;
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#0C1C20; --surface:#12272C; --ink:#E8F1F2; --text:#C9D8DA; --muted:#8DA3A8; --rule:#24404A;
-  --accent:#3FB8C8; --accent-ink:#06191C; --accent-soft:#163940; --tint:#262049; --violet:#B7A6FF;
-  --frame:#000000; color-scheme:dark } }
-:root[data-theme="dark"]{
-  --bg:#0C1C20; --surface:#12272C; --ink:#E8F1F2; --text:#C9D8DA; --muted:#8DA3A8; --rule:#24404A;
-  --accent:#3FB8C8; --accent-ink:#06191C; --accent-soft:#163940; --tint:#262049; --violet:#B7A6FF;
-  --frame:#000000; color-scheme:dark }
 
 *{ box-sizing:border-box }
 html{ -webkit-text-size-adjust:100% }
